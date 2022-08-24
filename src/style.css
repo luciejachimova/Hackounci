@@ -1,0 +1,42 @@
+body {
+  font-family: "Great Vibes", cursive;
+  background: linear-gradient(
+    90deg,
+    rgba(250, 221, 193, 1) 0%,
+    rgba(250, 221, 193, 1) 32%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+.carousel-inner {
+  background: linear-gradient(
+    to top,
+    rgb(40, 39, 38) 0%,
+    rgb(40, 39, 38) 25%,
+    rgb(40, 39, 38) 75%,
+    rgb(40, 39, 38) 100%
+  );
+}
+.carousel-item img {
+  display: block;
+  margin: 1% 15% 1%15%;
+  width: 20%;
+  float: left;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.carousel-item h2 {
+  font-size: 250%;
+  margin-top: 8%;
+  color: #fadcbc;
+}
+.card-body {
+  background: #212529;
+  color: white;
+  border-radius: 0 0 25px 25px;
+}
+.card {
+  border-radius: 25px;
+}
+.card img {
+  border-radius: 25px 25px 0 0;
+}

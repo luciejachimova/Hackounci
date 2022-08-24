@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HÁČKOUNCI | Ruční výroba</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/assets/favicon-fe2b79dafa39cd8d2bef6449372ed03d5cb311759845d4ac7b22fac8be25724e.ico"
+    />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="csrf-param" content="authenticity_token" />
+    <meta
+      name="csrf-token"
+      content="sVL-PyeaXAtYpOMiAjAZzkKIVSh-z8c7m__POYvyJ0IMV54dpUJqLtWesokUXMFjMHI_mWqrtDhE8Wy8ZwcFfQ"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="/assets/application-908c7197f2e5058debad9bcba27b59f26a210312e0201f182653cf5af47c34b9.css"
+      data-turbo-track="reload"
+    />
+
+    <link
+      rel="modulepreload"
+      href="/assets/application-e828f83e187e90ace737c72dfce0f5d5e7d86cf8427ae88158dab8589ca8fb6d.js"
+    />
+    <link
+      rel="modulepreload"
+      href="/assets/turbo.min-e5023178542f05fc063cd1dc5865457259cc01f3fba76a28454060d33de6f429.js"
+    />
+    <link
+      rel="modulepreload"
+      href="/assets/stimulus.min-b8a9738499c7a8362910cd545375417370d72a9776fb4e766df7671484e2beb7.js"
+    />
+    <link
+      rel="modulepreload"
+      href="/assets/stimulus-loading-1fc59770fb1654500044afd3f5f6d7d00800e5be36746d55b94a2963a7a228aa.js"
+    />
+    <script
+      src="/assets/es-module-shims.min-d89e73202ec09dede55fb74115af9c5f9f2bb965433de1c2446e1faa6dac2470.js"
+      async="async"
+      data-turbo-track="reload"
+    ></script>
+    <script type="module">
+      import "application";
+    </script>
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
+  <body class="d-flex flex-column min-vh-100" cz-shortcut-listen="true">
+    <style>
+      .login-img {
+        display: block;
+        float: right;
+        width: 25%;
+        position: relative;
+        margin-top: 450px;
+      }
+      body{
+         background: linear-gradient(90deg, rgba(250,221,193,1) 0%, rgba(250,221,193,1) 32%, rgba(255,255,255,1) 100%);
+      }
+      
+    </style>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">HÁČKOUNCI.CZ®</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="/deti">Pro děti</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/deky">Deky</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tasky">Plátěné tašky</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/navody">Návody</a>
+            </li>
+            <div class="d-flex">
+              <form
+                action="/search_item"
+                accept-charset="UTF-8"
+                data-remote="true"
+                method="get"
+              >
+                <div class="form-group row">
+                  <div class="col-sm-9 no-right-padding left-padding">
+                    <input
+                      type="text"
+                      name="item"
+                      id="item"
+                      placeholder="Hledej háčkounka..."
+                      autofocus="autofocus"
+                      class="form-control form-control-lg"
+                    />
+                  </div>
+                  <div class="col-sm-3 no-left-padding">
+                    <button
+                      name="button"
+                      type="submit"
+                      class="btn btn-success search"
+                    >
+                      <i class="fa fa-search fa-2x"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </ul>
+          <div class="d-flex">
+            <a href="/users/sign_in">
+              <i class="fa fa-user fa-2x user"></i>
+            </a>
+            <a href="/cart">
+              <i class="fa fa-shopping-cart fa-2x cart"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+      <div class="container-fluid">
+          <img class="login-img" src="images/3.png" alt="hrosik">
+        <div class="container">
+            
+          <section class="vh-100 gradient-custom">
+            <div class="container py-5 h-100">
+              <div
+                class="row d-flex justify-content-center align-items-center h-100"
+              >
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                  <div
+                    class="card bg-dark text-white"
+                    style="border-radius: 1rem"
+                  >
+                    <div class="card-body p-5 text-center">
+                      <div class="mb-md-5 mt-md-4 pb-5">
+                        <h2 class="fw-bold mb-2 text-uppercase">Přihlášení</h2>
+                        <p class="text-white-50 mb-5">
+                          Prosím zadejte svůj e-mail a heslo
+                        </p>
+
+                        <form
+                          data-turbo="false"
+                          class="new_user"
+                          id="new_user"
+                          action="/users/sign_in"
+                          accept-charset="UTF-8"
+                          method="post"
+                        >
+                          <input
+                            type="hidden"
+                            name="authenticity_token"
+                            value="d50YWD5Qyaj4fYUo9lxeWnO-BXNsZ9S0QTXAShl6MzgFipzHf_C8mhwP2b_LL9wNX6p-UhNUA6_kYNuvceXsOA"
+                            autocomplete="off"
+                          />
+
+                          <div class="form-outline form-white mb-4">
+                            <label class="form-label" for="user_Email"
+                              >Email</label
+                            >
+                            <input
+                              autofocus="autofocus"
+                              autocomplete="email"
+                              class="form-control form-control-lg"
+                              type="email"
+                              value=""
+                              name="user[email]"
+                              id="user_email"
+                            />
+                          </div>
+
+                          <div class="form-outline form-white mb-4">
+                            <label class="form-label" for="user_Heslo"
+                              >Heslo</label
+                            >
+                            <input
+                              autocomplete="current-password"
+                              class="form-control form-control-lg"
+                              type="password"
+                              name="user[password]"
+                              id="user_password"
+                            />
+                          </div>
+
+                          <p class="small mb-5 pb-lg-2">
+                            <a class="text-white-50" href="/users/password/new"
+                              >Zapomněli jste heslo?</a
+                            >
+                          </p>
+
+                          <input
+                            type="submit"
+                            name="commit"
+                            value="Přihlásit se"
+                            class="btn btn-outline-light btn-lg px-5"
+                            data-disable-with="Přihlásit se"
+                          />
+                        </form>
+                      </div>
+
+                      <div>
+                        <p class="mb-0">
+                          Ještě nemáte účet?
+                          <a class="text-white-50 fw-bold" href="/users/sign_up"
+                            >Registrovat se</a
+                          >
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <footer class="py-4 bg-dark text-white mt-auto footer">
+      <div class="container text-center">
+        <small>© 2022</small>
+      </div>
+    </footer>
+    <script
+      src="https://widget.packeta.com/www/js/packetaWidget.js"
+      data-api-key="1a3adec911d5d295"
+    ></script>
+
+    <iframe
+      name="__privateStripeMetricsController5600"
+      frameborder="0"
+      allowtransparency="true"
+      scrolling="no"
+      allow="payment *"
+      src="https://js.stripe.com/v3/m-outer-b346656c2d150ac66dfee26726768fb3.html#url=https%3A%2F%2Fhackounci.herokuapp.com%2Fusers%2Fsign_in&amp;title=H%C3%81%C4%8CKOUNCI%20%7C%20Ru%C4%8Dn%C3%AD%20v%C3%BDroba&amp;referrer=&amp;muid=9938ea9f-2470-4ec1-912b-c74846f7d7831174d7&amp;sid=NA&amp;version=6&amp;preview=false"
+      aria-hidden="true"
+      tabindex="-1"
+      style="
+        border: none !important;
+        margin: 0px !important;
+        padding: 0px !important;
+        width: 1px !important;
+        min-width: 100% !important;
+        overflow: hidden !important;
+        display: block !important;
+        visibility: hidden !important;
+        position: fixed !important;
+        height: 1px !important;
+        pointer-events: none !important;
+        user-select: none !important;
+      "
+    ></iframe>
+  </body>
+</html>
