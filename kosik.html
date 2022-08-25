@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Nákupní košík | Háčkounci.cz</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/assets/favicon-fe2b79dafa39cd8d2bef6449372ed03d5cb311759845d4ac7b22fac8be25724e.ico"
+    />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="csrf-param" content="authenticity_token" />
+    <meta
+      name="csrf-token"
+      content="cFHP0alAtnsjK5yrtYNc_F9zZ6zt63KOe9CC3qlL5IXNVK_zK5iAXq4RzQCj74RRLYkNHfmPAY2k3iFbRb7Gug"
+    />
+
+    <link
+      rel="stylesheet"
+      href="/assets/application-a725e3bfa02226dce4da3ff10eb72e96a88671dcada23deb7f85db5d089fc88b.css"
+      data-turbo-track="reload"
+    />
+    <script type="importmap" data-turbo-track="reload">
+      {
+        "imports": {
+          "application": "/assets/application-e828f83e187e90ace737c72dfce0f5d5e7d86cf8427ae88158dab8589ca8fb6d.js",
+          "@hotwired/turbo-rails": "/assets/turbo.min-e5023178542f05fc063cd1dc5865457259cc01f3fba76a28454060d33de6f429.js",
+          "@hotwired/stimulus": "/assets/stimulus.min-b8a9738499c7a8362910cd545375417370d72a9776fb4e766df7671484e2beb7.js",
+          "@hotwired/stimulus-loading": "/assets/stimulus-loading-1fc59770fb1654500044afd3f5f6d7d00800e5be36746d55b94a2963a7a228aa.js",
+          "controllers/application": "/assets/controllers/application-368d98631bccbf2349e0d4f8269afb3fe9625118341966de054759d96ea86c7e.js",
+          "controllers/hello_controller": "/assets/controllers/hello_controller-549135e8e7c683a538c3d6d517339ba470fcfb79d62f738a0a089ba41851a554.js",
+          "controllers": "/assets/controllers/index-2db729dddcc5b979110e98de4b6720f83f91a123172e87281d5a58410fc43806.js"
+        }
+      }
+    </script>
+    <link
+      rel="modulepreload"
+      href="/assets/application-e828f83e187e90ace737c72dfce0f5d5e7d86cf8427ae88158dab8589ca8fb6d.js"
+    />
+    <link
+      rel="modulepreload"
+      href="/assets/turbo.min-e5023178542f05fc063cd1dc5865457259cc01f3fba76a28454060d33de6f429.js"
+    />
+    <link
+      rel="modulepreload"
+      href="/assets/stimulus.min-b8a9738499c7a8362910cd545375417370d72a9776fb4e766df7671484e2beb7.js"
+    />
+    <link
+      rel="modulepreload"
+      href="/assets/stimulus-loading-1fc59770fb1654500044afd3f5f6d7d00800e5be36746d55b94a2963a7a228aa.js"
+    />
+    <script
+      src="/assets/es-module-shims.min-d89e73202ec09dede55fb74115af9c5f9f2bb965433de1c2446e1faa6dac2470.js"
+      async="async"
+      data-turbo-track="reload"
+    ></script>
+    <script type="module">
+      import "application";
+    </script>
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
+  <body>
+    <body class="d-flex flex-column min-vh-100" cz-shortcut-listen="true">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Háčkounci.cz®</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="/deti">Pro děti</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/deky">Deky</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/tasky">Plátěné tašky</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/navody">Návody</a>
+              </li>
+              <div class="d-flex">
+                <form
+                  action="/search_item"
+                  accept-charset="UTF-8"
+                  data-remote="true"
+                  method="get"
+                >
+                  <div class="form-group row">
+                    <div class="col-sm-9 no-right-padding left-padding">
+                      <input
+                        type="text"
+                        name="item"
+                        id="item"
+                        placeholder="Hledej háčkounka..."
+                        autofocus="autofocus"
+                        class="form-control form-control-lg"
+                      />
+                    </div>
+                    <div class="col-sm-3 no-left-padding">
+                      <button
+                        name="button"
+                        type="submit"
+                        class="btn btn-success search"
+                      >
+                        <i class="fa fa-search fa-2x"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </ul>
+            <div class="d-flex">
+              <a href="/users/sign_in">
+                <i class="fa fa-user fa-2x user"></i>
+              </a>
+              <a href="/cart">
+                <i class="fa fa-shopping-cart fa-2x cart"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container"></div>
+      <section class="h-100 h-custom" style="background-color: #eeeeee">
+        <div class="container py-5 h-50">
+          <div
+            class="row d-flex justify-content-center align-items-center h-100"
+          >
+            <div class="col-12">
+              <div
+                class="card card-registration card-registration-2"
+                style="border-radius: 15px"
+              >
+                <div class="card-body p-0">
+                  <div class="row g-0">
+                    <div class="col-lg-8">
+                      <div class="p-5">
+                        <div
+                          class="d-flex justify-content-between align-items-center mb-5"
+                        >
+                          <h1 class="title fw-bold mb-0 text-black">
+                            Nákupní košík
+                          </h1>
+                          <h6 class="mb-0 text-muted">1 Položka</h6>
+                        </div>
+
+                        <hr class="my-4" />
+                        <div
+                          class="row mb-4 d-flex justify-content-between align-items-center"
+                        >
+                          <div class="col-md-2 col-lg-2 col-xl-2">
+                            <img
+                              class="img-fluid rounded-3"
+                              src="https://hackounci.herokuapp.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBGUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c4573a10ca9060b7eeaaf58df3143d0bc40d3944/jezek-min.jpeg"
+                            />
+                          </div>
+                          <div class="col-md-3 col-lg-3 col-xl-3">
+                            <h6 class="text-black mb-0">Ježeček</h6>
+                          </div>
+                          <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                            <form
+                              style="display: inline-block"
+                              class="button_to"
+                              method="post"
+                              action="/cart/minus_item/17"
+                            >
+                              <input
+                                type="hidden"
+                                name="_method"
+                                value="delete"
+                                autocomplete="off"
+                              /><button class="disabled" type="submit">
+                                <i class="fa fa-minus"></i></button
+                              ><input
+                                type="hidden"
+                                name="authenticity_token"
+                                value="-kwtUb5qAiS4NG_KLzRS3sZJHALerGgr95MePsAC_UeFZGA5Hn3nF1NDMdeqKtJtxsH1k_PpNSo3yW97f4HbBA"
+                                autocomplete="off"
+                              />
+                            </form>
+                            <h6 class="text-black mt-1">1 ks</h6>
+                            <form
+                              style="display: inline-block"
+                              class="button_to"
+                              method="post"
+                              action="/cart/plus_item/17"
+                            >
+                              <button class="minus-butt" type="submit">
+                                <i class="fa fa-plus"></i></button
+                              ><input
+                                type="hidden"
+                                name="authenticity_token"
+                                value="Kbe2SfnFdaMGxQuIEAvU_k5SPoBzI01SovIPdwnLr3wiklt-k-NDJ6iivGD4jTUwyh8_U1Tfc_hemEbz3_r9BQ"
+                                autocomplete="off"
+                              />
+                            </form>
+                          </div>
+                          <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                            <h6 class="mb-0">399 Kč</h6>
+                          </div>
+                          <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                            <form
+                              style="display: inline-block"
+                              class="button_to"
+                              method="post"
+                              action="/cart/remove_from_cart/17"
+                            >
+                              <input
+                                type="hidden"
+                                name="_method"
+                                value="delete"
+                                autocomplete="off"
+                              /><button class="close-butt" type="submit">
+                                <i class="fa fa-trash fa-2x"></i></button
+                              ><input
+                                type="hidden"
+                                name="authenticity_token"
+                                value="GKMf3Zao9YZhoIWVhj23q6UovIjl-FLNeA4LFlWcr_0-2ebJDEEOG91NPjb-ySEHZXNN8mAafqIMlGYhnxcGzw"
+                                autocomplete="off"
+                              />
+                            </form>
+                          </div>
+                        </div>
+
+                        <hr class="my-4" />
+
+                        <div class="pt-5">
+                          <h6 class="mb-0">
+                            <a class="text-body"> </a
+                            ><a class="shop" href="/">Pokračovat v nákupu</a>
+                          </h6>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 bg-grey">
+                      <div class="p-5">
+                        <h3 class="title fw-bold mb-5 mt-2 pt-1">
+                          Souhrn objednávky
+                        </h3>
+                        <hr class="my-4" />
+
+                        <div class="d-flex justify-content-between mb-4">
+                          <h5>1 Položka</h5>
+                        </div>
+
+                        <hr class="my-4" />
+
+                        <div class="d-flex justify-content-between mb-3">
+                          <h5 class="text-uppercase">Cena celkem:</h5>
+                          <h5>399 Kč</h5>
+                        </div>
+
+                        <hr class="my-4" />
+
+                        Pro pokračování v nákupu se
+                        <a class="text-center" href="/orders/new">přihlašte</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="py-4 bg-dark text-white mt-auto footer">
+        <div class="container text-center">
+          <small>© 2022</small>
+        </div>
+      </footer>
+      <script
+        src="https://widget.packeta.com/www/js/packetaWidget.js"
+        data-api-key="1a3adec911d5d295"
+      ></script>
+
+      <iframe
+        name="__privateStripeMetricsController5590"
+        frameborder="0"
+        allowtransparency="true"
+        scrolling="no"
+        allow="payment *"
+        src="https://js.stripe.com/v3/m-outer-92f2b2e7c80dedc4ade388155b8977e9.html#url=https%3A%2F%2Fhackounci.herokuapp.com%2Fcart&amp;title=N%C3%A1kupn%C3%AD%20ko%C5%A1%C3%ADk%20%7C%20H%C3%A1%C4%8Dkounci.cz&amp;referrer=https%3A%2F%2Fhackounci.herokuapp.com%2Fdeti&amp;muid=9938ea9f-2470-4ec1-912b-c74846f7d7831174d7&amp;sid=902f9186-16ed-476a-837c-b7036f678b13a831a1&amp;version=6&amp;preview=false"
+        aria-hidden="true"
+        tabindex="-1"
+        style="
+          border: none !important;
+          margin: 0px !important;
+          padding: 0px !important;
+          width: 1px !important;
+          min-width: 100% !important;
+          overflow: hidden !important;
+          display: block !important;
+          visibility: hidden !important;
+          position: fixed !important;
+          height: 1px !important;
+          pointer-events: none !important;
+          user-select: none !important;
+        "
+      ></iframe>
+    </body>
+  </body>
+</html>

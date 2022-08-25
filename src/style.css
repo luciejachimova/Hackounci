@@ -78,9 +78,16 @@ body {
 .footer-logo {
   background: white;
   border-radius: 50%;
-  float: left;
+  display: block;
+  margin: 0 20px;
 }
 .footer-h6 {
   color: #fadcbb;
   font-size: 18px;
+}
+.fb-icon {
+  width: 14px;
+}
+.copyright {
+  color: #fadcbb;
 }
